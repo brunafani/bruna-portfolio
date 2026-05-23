@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruna Fani Duarte Rocha — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1410; --paper: #f5f0e8; --cream: #ede8dc; --blush: #e8c9b8;
+    --rose: #c97b5a; --terracotta: #a0523a; --sand: #d4c4a8; --muted: #7a6f63; --accent: #8b3a2a;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(245,240,232,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--sand); }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; font-weight: 400; }
+  .nav-links a:hover { color: var(--accent); }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; padding-top: 80px; }
+  .hero-left { padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--rose); }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .hero-name em { font-style: italic; color: var(--terracotta); }
+  .hero-subtitle { font-size: 0.95rem; color: var(--muted); max-width: 28rem; line-height: 1.75; margin-bottom: 2.5rem; font-weight: 300; border-left: 2px solid var(--blush); padding-left: 1.25rem; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 3rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; border: 1px solid var(--sand); border-radius: 2px; color: var(--muted); transition: all 0.2s; }
+  .tag:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .hero-contact { display: flex; flex-direction: column; gap: 0.4rem; }
+  .hero-contact a { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; font-weight: 400; }
+  .hero-contact a::before { content: '→'; color: var(--rose); font-size: 0.75rem; }
+  .hero-contact a:hover { color: var(--accent); }
+  .hero-right { background: var(--ink); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .hero-right-inner { padding: 4rem; position: relative; z-index: 1; }
+  .big-letter { font-family: 'Playfair Display', serif; font-size: clamp(12rem, 20vw, 22rem); font-weight: 900; line-height: 1; color: rgba(255,255,255,0.04); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); user-select: none; letter-spacing: -0.05em; white-space: nowrap; }
+  .hero-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .hero-stat { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem; }
+  .hero-stat-number { font-family: 'Playfair Display', serif; font-size: 2.75rem; font-weight: 700; color: var(--blush); line-height: 1; margin-bottom: 0.4rem; }
+  .hero-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; line-height: 1.4; font-weight: 300; }
+  .hero-desc { color: rgba(255,255,255,0.6); font-size: 0.88rem; line-height: 1.75; margin-bottom: 3rem; font-weight: 300; max-width: 28rem; }
+  section { padding: 5rem 3rem; position: relative; z-index: 1; }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--sand); padding-bottom: 1.25rem; }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; color: var(--rose); padding: 0.2rem 0.5rem; border: 1px solid var(--rose); border-radius: 2px; flex-shrink: 0; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .section-title em { font-style: italic; color: var(--terracotta); }
+  .video-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 1.5px; background: var(--sand); }
+  .video-card { background: var(--cream); padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: background 0.2s; }
+  .video-card:hover { background: var(--blush); }
+  .video-card.featured { background: var(--ink); color: var(--paper); }
+  .video-card.featured:hover { background: #2a1f18; }
+  .video-card-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); }
+  .video-card.featured .video-card-label { color: var(--blush); }
+  .video-card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; line-height: 1.3; }
+  .video-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; flex: 1; font-weight: 300; }
+  .video-card.featured .video-card-desc { color: rgba(255,255,255,0.5); }
+  .video-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); border-bottom: 1px solid var(--blush); padding-bottom: 0.15rem; width: fit-content; transition: all 0.2s; }
+  .video-link:hover { color: var(--accent); border-color: var(--accent); }
+  .video-card.featured .video-link { color: var(--blush); border-color: rgba(232,201,184,0.3); }
+  .video-card.featured .video-link:hover { color: #fff; border-color: #fff; }
+  .video-link::after { content: '↗'; }
+  .social-section { background: var(--cream); }
+  .org-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--sand); }
+  .org-card { background: var(--paper); padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .org-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; }
+  .org-role { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose); }
+  .org-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; flex: 1; font-weight: 300; }
+  .org-stat { display: flex; gap: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--sand); }
+  .org-stat-n { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--terracotta); line-height: 1; }
+  .org-stat-l { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.05em; }
+  .org-link { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  .org-link::after { content: '↗'; }
+  .org-link:hover { color: var(--accent); }
+  .newsletter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--sand); margin-bottom: 1.5px; }
+  .newsletter-card { background: var(--paper); padding: 2.5rem; }
+  .nl-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.75rem; }
+  .nl-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.75rem; line-height: 1.25; }
+  .nl-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; font-weight: 300; margin-bottom: 1.25rem; }
+  .nl-link { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; width: fit-content; border-bottom: 1px solid var(--blush); padding-bottom: 0.1rem; }
+  .nl-link::after { content: '↗'; }
+  .nl-link:hover { color: var(--accent); border-color: var(--accent); }
+  .writing-section { background: var(--ink); color: var(--paper); }
+  .writing-section .section-title { color: var(--paper); }
+  .writing-section .section-number { color: var(--rose); border-color: var(--rose); }
+  .writing-section .section-header { border-color: rgba(255,255,255,0.1); }
+  .writing-intro { font-size: 0.88rem; color: rgba(255,255,255,0.5); max-width: 40rem; line-height: 1.75; margin-bottom: 3rem; font-style: italic; font-weight: 300; }
+  .writing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); }
+  .writing-card { background: #1f1812; padding: 2.5rem; position: relative; overflow: hidden; }
+  .writing-card::before { content: attr(data-letter); position: absolute; top: -1.5rem; right: 1rem; font-family: 'Playfair Display', serif; font-size: 10rem; font-weight: 900; color: rgba(255,255,255,0.03); line-height: 1; user-select: none; }
+  .writing-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; background: var(--rose); color: var(--paper); padding: 0.25rem 0.6rem; border-radius: 2px; margin-bottom: 1rem; }
+  .writing-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.2; }
+  .writing-client { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 1.25rem; }
+  .writing-excerpt { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.75; font-weight: 300; margin-bottom: 1.5rem; }
+  blockquote.writing-quote { border-left: 2px solid var(--rose); padding-left: 1rem; margin: 1.5rem 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  blockquote.writing-quote cite { display: block; font-style: normal; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--rose); margin-top: 0.6rem; }
+  .writing-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blush); border-bottom: 1px solid rgba(232,201,184,0.25); padding-bottom: 0.1rem; transition: all 0.2s; width: fit-content; }
+  .writing-link::after { content: '↗'; }
+  .writing-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+  footer { background: var(--cream); padding: 3rem; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--sand); }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; line-height: 1; letter-spacing: -0.02em; }
+  .footer-name span { color: var(--terracotta); font-style: italic; }
+  .footer-meta { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--muted); text-align: right; line-height: 1.9; }
+  .footer-meta a { color: var(--muted); transition: color 0.2s; }
+  .footer-meta a:hover { color: var(--accent); }
+  .reveal { opacity: 0; transform: translateY(1.5rem); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vh; } section { padding: 3rem 1.5rem; } .video-grid { grid-template-columns: 1fr; }
+    .org-grid { grid-template-columns: 1fr; } .newsletter-grid { grid-template-columns: 1fr; }
+    .writing-grid { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
+    .footer-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Bruna Fani Duarte Rocha</div>
+  <ul class="nav-links">
+    <li><a href="#video">Video</a></li>
+    <li><a href="#social">Social Media</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="mailto:faniduartee@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Portfolio 2026</div>
+    <h1 class="hero-name">Bruna<br><em>Fani</em><br>Duarte</h1>
+    <p class="hero-subtitle">
+      A curated selection of communications and research work produced across feminist, activist, and academic contexts — rooted in movement-building, gender justice, and the strategic use of digital media to shift public narratives.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Communications</span>
+      <span class="tag">Masculinities</span>
+      <span class="tag">Gender Justice</span>
+      <span class="tag">Digital Storytelling</span>
+      <span class="tag">Applied Research</span>
+      <span class="tag">Multilingual</span>
+    </div>
+    <div class="hero-contact">
+      <a href="mailto:faniduartee@gmail.com">faniduartee@gmail.com</a>
+      <a href="https://linkedin.com/in/brunafani" target="_blank">linkedin.com/in/brunafani</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="big-letter">B</div>
+    <div class="hero-right-inner">
+      <p class="hero-desc">
+        Doctoral researcher and strategic communicator. Specialising in digital masculinities, reproductive rights, and women's political participation — with a presence in organisations reaching 21,000+ beneficiaries across 90+ countries.
+      </p>
+      <div class="hero-stat-grid">
+        <div class="hero-stat"><div class="hero-stat-number">21k+</div><div class="hero-stat-label">Beneficiaries<br>reached</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">90+</div><div class="hero-stat-label">Countries<br>of reach</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">500+</div><div class="hero-stat-label">Volunteers<br>coordinated</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">3</div><div class="hero-stat-label">Languages of<br>production</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="section-header reveal">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Video Production &amp; <em>Digital Storytelling</em></h2>
+  </div>
+  <div class="video-grid reveal">
+    <div class="video-card featured">
+      <div class="video-card-label">Documentary</div>
+      <div class="video-card-title">El Parto es Nuestro x Editorial Barret</div>
+      <div class="video-card-desc">Strategic video communication for the Spanish feminist association El Parto es Nuestro, in partnership with Editorial Barret. Supporting the development of a documentary film project on obstetric violence and feminist health activism. Demonstrates capacity for institutional storytelling and narrative framing for feminist audiences.</div>
+      <a href="https://www.youtube.com/watch?v=bTDw1poOX9o" target="_blank" class="video-link">Watch on YouTube</a>
+    </div>
+    <div class="video-card">
+      <div class="video-card-label">Reel — Politics For Her</div>
+      <div class="video-card-title">Short-form #1</div>
+      <div class="video-card-desc">Short-form video fully produced by Bruna: script development, filming, and editing. Demonstrates ability to translate feminist political messaging into engaging, platform-native content for global audiences.</div>
+      <a href="https://www.instagram.com/reel/DV__dOzBz7i/" target="_blank" class="video-link">Watch on Instagram</a>
+    </div>
+    <div class="video-card">
+      <div class="video-card-label">Reel — Politics For Her</div>
+      <div class="video-card-title">Short-form #2</div>
+      <div class="video-card-desc">Second short-form video, also fully produced by Bruna. Demonstrates consistency in creative output and adaptability across campaign narratives and tones.</div>
+      <a href="https://www.instagram.com/reel/DWP42HOgNph/" target="_blank" class="video-link">Watch on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="social-section" id="social">
+  <div class="section-header reveal">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Social Media <em>Strategy &amp; Management</em></h2>
+  </div>
+  <div class="org-grid reveal">
+    <div class="org-card">
+      <div class="org-role">Strategy &amp; management — co-lead</div>
+      <div class="org-name">Politics For Her</div>
+      <div class="org-desc">Global feminist organisation focused on women's political participation across the Global South. Bruna co-leads strategic communications, campaign planning, and multilingual content creation across Instagram, TikTok, LinkedIn, and YouTube.</div>
+      <div class="org-stat">
+        <div class="org-stat-item"><div class="org-stat-n">21k+</div><div class="org-stat-l">beneficiaries</div></div>
+        <div class="org-stat-item"><div class="org-stat-n">500+</div><div class="org-stat-l">volunteers</div></div>
+      </div>
+      <a href="https://www.instagram.com/politics4her" target="_blank" class="org-link">@politics4her</a>
+    </div>
+    <div class="org-card">
+      <div class="org-role">Multilingual communications</div>
+      <div class="org-name">Me Too International</div>
+      <div class="org-desc">One of the most globally recognised movements against sexual violence, with reach across 90+ countries. Bruna contributed to multilingual communications strategy, translating and adapting advocacy materials for Portuguese and Spanish-speaking audiences with survivor-centred feminist language.</div>
+      <div class="org-stat">
+        <div class="org-stat-item"><div class="org-stat-n">90+</div><div class="org-stat-l">countries</div></div>
+      </div>
+      <a href="https://www.instagram.com/metoomvmt" target="_blank" class="org-link">@metoomvmt</a>
+    </div>
+    <div class="org-card">
+      <div class="org-role">Communications during doctoral fieldwork</div>
+      <div class="org-name">El Parto es Nuestro</div>
+      <div class="org-desc">Spain's leading feminist association for respectful maternity care. Bruna contributed to communications during her doctoral fieldwork in Madrid (2023–2024), the period that became the subject of her PhD thesis.</div>
+      <div class="org-stat">
+        <div class="org-stat-item"><div class="org-stat-n">ESP</div><div class="org-stat-l">Madrid, 2023–24</div></div>
+      </div>
+      <a href="https://www.instagram.com/elpartoesnuestro" target="_blank" class="org-link">@elpartoesnuestro</a>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="section-header reveal">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Newsletter &amp; <em>Institutional Communications</em></h2>
+  </div>
+  <div class="newsletter-grid reveal">
+    <div class="newsletter-card">
+      <div class="nl-label">IUAES — July 2025</div>
+      <div class="nl-title">IUAES Newsletter</div>
+      <div class="nl-desc">Bruna contributed to the July 2025 newsletter of the International Union of Anthropological and Ethnological Sciences — a global federation spanning 100+ countries. Demonstrates ability to produce institutional communications for diverse, multilingual, international audiences.</div>
+      <a href="https://waunet.org/iuaes/newsletter/iuaes-newsletter-july-2025/" target="_blank" class="nl-link">Read online</a>
+    </div>
+    <div class="newsletter-card">
+      <div class="nl-label">IUAES — 2024</div>
+      <div class="nl-title">Nomadic Peoples Commission — Social Media Manager</div>
+      <div class="nl-desc">As Social Media Manager (2024), Bruna developed and implemented a communication strategy to expand global outreach for the Commission, producing content in English for academic, policy, and civil society audiences worldwide.</div>
+    </div>
+  </div>
+  <div class="newsletter-grid reveal" style="margin-top:1.5px">
+    <div class="newsletter-card" style="background:var(--cream); grid-column: 1 / -1;">
+      <div class="nl-label">Editorial Series — Politics For Her</div>
+      <div class="nl-title">Feminist Figures Series</div>
+      <div class="nl-desc">Monthly editorial series connecting with grassroots feminist organisations and highlighting their founders and leaders across areas including GBV, SRHR, and women's political participation. Bruna contributes to editorial strategy, content coordination, and multilingual communications for this series.</div>
+      <a href="https://www.politics4her.com/feministfigures" target="_blank" class="nl-link">Read the series</a>
+    </div>
+  </div>
+</section>
+
+<section class="writing-section" id="writing">
+  <div class="section-header reveal">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Writing Samples: <em>Masculinities &amp; Digital Gender Politics</em></h2>
+  </div>
+  <p class="writing-intro reveal">
+    Produced in the context of applied research on digital masculinities and the manosphere among adolescent boys in Latin America, commissioned by Equimundo and Plan International (2025–2026). Both produced in Spanish, reflecting Bruna's professional multilingual practice.
+  </p>
+  <div class="writing-grid reveal">
+    <div class="writing-card" data-letter="A">
+      <div class="writing-badge">Writing Sample A</div>
+      <div class="writing-title">Cross-Sectional Analysis Sheet — Brazil</div>
+      <div class="writing-client">Studying the Manosphere in Latin America | Equimundo &amp; Plan International | Brazil, 2026</div>
+      <div class="writing-excerpt">Comparative articulation of materials produced in two focus groups conducted in Brazil — with 13 and 15-year-old participants from Salvador (BA) and Vimao (RS). Analyses how the manosphere functions not primarily as ideology, but as affective infrastructure occupying the space left by absent adult guidance.</div>
+      <blockquote class="writing-quote">
+        "No tienen personas cerca. Buscan una guia."
+        <cite>— Gustavo, FG1, 13 years old, Salvador (BA)</cite>
+      </blockquote>
+      <div class="writing-excerpt" style="font-size:0.8rem; color:rgba(255,255,255,0.4);">Key findings: void of adult reference; coexistence of critical distance and real exposure; direct impact of sigma content on behaviour toward a female peer; spontaneous critical capacity among adolescents as an entry point for intervention design.</div>
+    </div>
+    <div class="writing-card" data-letter="B">
+      <div class="writing-badge">Writing Sample B</div>
+      <div class="writing-title">Feminist Figures — Marta Dillon</div>
+      <div class="writing-client">Politics For Her | Collective editorial production | 2024</div>
+      <div class="writing-excerpt">The Feminist Figures series highlights feminist founders and leaders from grassroots organisations worldwide across areas including GBV, SRHR, bodily autonomy, and feminist political participation. Bruna contributes to editorial strategy, content framing, and multilingual communications for this series.</div>
+      <blockquote class="writing-quote">Volume 6 features Marta Dillon — Argentinian queer feminist journalist and activist working across transfeminism, abortion rights, and decolonialism. Recipient of the Jose Marti award and named Ambassador of Reproductive Rights by the Instituto Social y Politico de las Mujeres.</blockquote>
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="https://www.politics4her.com/s/Marta-Dillon.pdf" target="_blank" class="writing-link">Read Volume 6</a>
+        <a href="https://www.politics4her.com/feministfigures" target="_blank" class="writing-link">Full series</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-name">Bruna <span>Fani</span></div>
+    <div style="font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--muted); margin-top:0.5rem;">Florianopolis, Brazil &middot; May 2026</div>
+  </div>
+  <div class="footer-meta">
+    <a href="mailto:faniduartee@gmail.com">faniduartee@gmail.com</a><br>
+    <a href="https://linkedin.com/in/brunafani" target="_blank">linkedin.com/in/brunafani</a><br><br>
+    Communications &middot; Masculinities &middot; Gender Justice<br>
+    Feminist Digital Storytelling
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
